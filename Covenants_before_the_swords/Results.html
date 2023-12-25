@@ -1,0 +1,61 @@
+{{ block title }}Results{{ endblock }}
+{{ block content }}
+<style>
+    .otree-title {
+    text-align: center;
+    font-size: 2em;
+    font-weight:bold;
+  }
+
+  .otree-btn-next {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    padding:auto;
+  }
+  div {
+    display:block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+</style>
+
+    <div style="font-weight: 400;">
+        The period ends because no player assigned any points in the last stage.
+    </div>
+    <hr/>
+    <div style="font-weight: 400;">
+        Other groups are still making decisions in this period.
+        While you wait for the experiment to continue,
+        please take the next few minutes to complete a summary sheet for this period.
+        These notes may help you make decisions in future periods.
+    </div>
+    <hr/>
+    {{for p in group.get_players}}
+        {{if p.id_in_group == player.id_in_group}}
+        <div>Your contribution: {{p.contribution}}</div>
+        {{else}}
+        <div>Contribution of Player{{p.id_in_group}}: {{p.contribution}}</div>
+        {{endif}}
+    {{endfor}}
+    <hr/>
+
+    {{for p in group.get_players}}
+        {{if p.id_in_group == player.id_in_group}}
+        <div>Total points assigned to you: {{p.TotalReceived}}</div>
+        {{else}}
+        <div>Total points assigned to Player{{p.id_in_group}}: {{p.TotalReceived}}</div>
+        {{endif}}
+    {{endfor}}
+
+    <hr/>
+    <div>Your earnings from this period are: {{player.payoff}}</div>
+    
+
+    {{if player.round_number == C.NUM_ROUNDS}}
+    {{ next_button }}
+    {{endif}}
+{{ endblock }}

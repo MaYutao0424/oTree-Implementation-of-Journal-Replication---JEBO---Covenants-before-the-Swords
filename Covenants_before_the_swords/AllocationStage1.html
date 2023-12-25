@@ -1,0 +1,78 @@
+{{ block title }}Allocation Stage 1{{ endblock }}
+{{ block content }}
+<style>
+  .otree-title {
+    text-align: center;
+    font-size: 2em;
+    font-weight:bold;
+  }
+
+  .otree-btn-next {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    padding:auto;
+  }
+
+  table {
+    width: 1000px;
+    height: 500px;
+    margin: auto;
+    padding:auto;
+  }
+  th {
+    height: 35px;  
+  } 
+  table, td, th {
+    border: 1px solid ;
+    border-collapse: collapse;
+    font-size: 20px;
+    text-align: center;
+  }
+</style>
+
+<div style = "text-align: center; font-size: 20px; margin-bottom: 20px; ">
+  Please use the fields below to assign points to the other players.<br>If you don't wish to assign points to a particular player you must enter'0'. 
+</div>
+
+<table>
+  <tr>
+      <th>Player</th>
+      <th>Return from public account</th>
+      <th>Contribution</th>
+      <th>Earnings from contribution stage</th>
+      <th>Points you assign</th>
+  </tr>
+
+  {% for p in group.get_players %}
+  <tr id="{{ player.id_in_group }}">
+    <th>
+      {% if player.id_in_group == p.id_in_group%}
+        <strong>You</strong>
+      {% else %}
+        Player {{ p.id_in_group }}
+      {% endif %}
+    </th>
+    <td>
+      {% if p.role == 'Type_A' %}
+        0.3
+      {% else %}
+        0.6
+      {% endif %}
+    </td>
+    <td>{{ p.contribution }}</td>
+    <td>{{ p.payoff }}</td>
+    <td>
+      {% if player.id_in_group == p.id_in_group%}
+      <input name="PointsGived{{ p.id_in_group }}" type="hidden" value='0'/>
+      {% else %}
+      <input name="PointsGived{{ p.id_in_group }}" type="number" />
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{{ next_button }}
+
+{{ endblock }}

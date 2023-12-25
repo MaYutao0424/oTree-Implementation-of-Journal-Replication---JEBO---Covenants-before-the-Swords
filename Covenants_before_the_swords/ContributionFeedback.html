@@ -1,0 +1,51 @@
+{{ extends "global/Page.html" }}
+{{ block title }}Feedback After Contribution Stage{{ endblock }}
+{{ block content }}
+<style>
+  .otree-title {
+    text-align: center;
+    font-size: 2em;
+    font-weight:bold;
+  }
+
+  .otree-btn-next {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    padding:auto;
+  }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.text {
+  font-size: 20px;
+  margin: 10px;
+}
+
+
+
+
+
+</style>
+
+
+
+
+<div class="container">
+  <div class="text">Your contribution: {{player.contribution}}</div>
+  <div class="text">Total contribution: {{group.total_contribution}}</div>
+  <div class="text">Money kept:{{money_kept}}</div>
+  <div class="text">Your income from the public account: {{individual_share}}</div>
+  <div class="text">Your earnings from the contribution stage: {{player.payoff}}</div>
+</div>
+
+
+{{ next_button }}
+ 
+{{ endblock }}
