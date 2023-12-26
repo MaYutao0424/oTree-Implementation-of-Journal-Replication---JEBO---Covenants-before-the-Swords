@@ -68,7 +68,7 @@ def set_payoffs(group: Group):
     contributions = [p.contribution for p in players]
     group.total_contribution = sum(contributions)
     for p in players:
-        if p.role == 'Type A':
+        if p.role == 'Type_A':
             p.payoff = C.ENDOWMENT - p.contribution + group.total_contribution * C.MULTIPLIER_A
         else:
             p.payoff = C.ENDOWMENT - p.contribution + group.total_contribution * C.MULTIPLIER_B
