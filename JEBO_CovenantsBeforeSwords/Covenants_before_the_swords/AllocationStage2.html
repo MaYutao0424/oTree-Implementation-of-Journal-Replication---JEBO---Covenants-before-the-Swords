@@ -1,0 +1,143 @@
+{{ block title }}AllocationStage2{{ endblock }}
+{{ block content }}
+
+<style>
+  .otree-title {
+    text-align: center;
+    font-size: 2em;
+    font-weight:bold;
+  }
+
+  div{
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+
+  table {
+    width: 1000px;
+    height: 500px;
+    margin: auto;
+    padding:auto;
+  }
+  th {
+    height: 35px;  
+  } 
+  table, td, th {
+    border: 1px solid ;
+    border-collapse: collapse;
+    font-size: 20px;
+    text-align: center;
+  }
+</style>
+
+<div style = "text-align: center; font-size: 20px ;margin-top:20px; margin-bottom:20px;">In the table below you can see the points that were assigned to each player in your group during Allocation Stage 1:</div>
+
+<table>
+  <tr>
+      <th>Player</th>
+      <th>Return from public account</th>
+      <th>Contribution</th>
+      <th>Earnings from contribution stage</th>
+      <th>Total points received</th>
+      {% for p in group.get_players %}
+        {% if player.id_in_group == p.id_in_group%}
+        <th>Points assigned by You</th>
+        {% else %}
+        <th>Points assigned by Player {{ p.id_in_group }}</th>
+        {% endif %}
+      {% endfor %}
+  </tr>
+
+  {% for p in group.get_players %}
+  <tr>
+    <td>
+      {% if player.id_in_group == p.id_in_group%}
+        <strong>You</strong>
+      {% else %}
+        Player {{ p.id_in_group }}
+      {% endif %}
+    </td>
+    <td>
+      {% if p.role == 'Type_A' %}
+        0.3
+      {% else %}
+        0.6
+      {% endif %}
+    </td>
+    <td>{{ p.contribution }}</td>
+    <td>{{ p.payoff }}</td>
+    <td>{{p.TotalReceived}}</td>
+    <td >
+      {{if forloop.counter == 1}}
+      {{else}}
+      {{p.PointsReceived1}}
+      {% endif %}
+    </td>
+    <td >
+      {{if forloop.counter == 2}}
+      {{else}}
+      {{p.PointsReceived2}}
+      {% endif %}
+    </td>
+    <td >
+      {{if forloop.counter == 3}}
+      {{else}}
+      {{p.PointsReceived3}}
+      {% endif %}
+    </td>
+    <td >
+      {{if forloop.counter == 4}}
+      {{else}}
+      {{p.PointsReceived4}}
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div style = "text-align: center; font-size: 20px ; font-weight: bolder ;margin-top: 20px; ">
+  Please use the fields below to assign points to the other players.<br> you don't wish to assign points to a particular player you must enter'0'.
+</div>
+
+{% for p in group.get_players %}
+  {{if p.id_in_group == player.id_in_group}}
+  <div style="margin-top:10px; margin-bottom:10px;display: none;font-size: 18px">Points you assign to Player {{p.id_in_group}}:   <input name="PointsAdded{{p.id_in_group}}" type="number"  id = 'PointsAdded{{p.id_in_group}}' value="0"/></div>
+  {{else}}
+  <div style="margin-top:10px; margin-bottom:10px;font-size: 18px">Points you assign to Player {{p.id_in_group}}:   <input name="PointsAdded{{p.id_in_group}}" type="number"  id = 'PointsAdded{{p.id_in_group}}' value="0" /></div>
+  {{endif}}
+{{endfor}}
+
+<input type="button" onclick="javascript:location.reload()"value ='Refresh' id = 'Refresh'></input>
+<button type="button" onclick="sendValue()" id = 'PointsAdded'>Submit</button>
+
+<script>
+  
+  let PointsAdded1 = document.getElementById('PointsAdded1');
+  let PointsAdded2 = document.getElementById('PointsAdded2');
+  let PointsAdded3 = document.getElementById('PointsAdded3');
+  let PointsAdded4 = document.getElementById('PointsAdded4');
+
+  function sendValue() {
+    alert('You have submitted your points');
+    let sendValueRefresh = document.getElementById('Refresh');
+    sendValueRefresh.click();
+    liveSend({'PointsAdded1': + PointsAdded1.value,
+              'PointsAdded2': + PointsAdded2.value,
+              'PointsAdded3': + PointsAdded3.value,
+              'PointsAdded4': + PointsAdded4.value});
+  }
+
+  function liveRecv(data) {
+
+    if (data['finished']) {
+        document.getElementById('form').submit();
+      };
+    
+  }
+  window.onload = function() {
+        setInterval(function() { location.reload();} , 15000);
+        
+    };
+</script>
+{{ endblock }}
