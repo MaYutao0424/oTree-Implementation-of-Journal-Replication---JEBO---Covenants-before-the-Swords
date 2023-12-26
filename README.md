@@ -10,6 +10,7 @@
 > When agents derive heterogeneous benefits from cooperation, a tension between efficiency and equality often arises. This tension can impede agents’ ability to cooperate efficiently. We design a laboratory   experiment, in which we investigate the capacity of communication and punishment, separately and jointly, to promote cooperation in such an environment. Our results reveal that cooperation and earnings are significantly greater when both communication and punishment (a sword) are possible than when only one is available. Both cooperation levels and earnings, however, still fall substantially below the maximum possible. The reason is that groups establish covenants, i.e. mutual contribution agreements, that tend to strike a compromise between efficiency and equality. The timing of communication is critical. A history of sanctioning substantially reduces the probability that groups subsequently establish a covenant. Overall, our findings indicate not only the benefits of early communication, but also some limits to efficient cooperation in heterogeneous groups
 - 简单来说，这是一个在**公共品博弈范式**的基础上，添加了**沟通和惩罚**处理条件的实验。作者想要探究在存在异质性的群体中，交流和惩罚（单独或联合使用）对促进合作的效果。详细内容可以参考原文
 - 在oTree复刻中，仍保留了原文实现的核心功能，包括**角色划分、沟通、贡献分配、惩罚与反击**，但为简便起见，在轮次、页面跳转等方面做了调整
+- b站视频演示：https://www.bilibili.com/video/BV1bT4y1s77c/?vd_source=77a3d9721321c3e4c44bacd0350cda67
 ## Examples
 ### Contribute
 - 实验中，4人为一个小组，他们要完成一个公共品博弈实验。玩家被分为公共池收益系数为0.3的Type A或0.6的Type B，每组两位Type A和两位Type B
